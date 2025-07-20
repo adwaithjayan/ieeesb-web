@@ -69,21 +69,104 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type HomePageDocumentDataSlicesSlice = HeroSlice;
+
 /**
- * Item in *settings → Navigations*
+ * Content for Home Page documents
  */
-export interface SettingsDocumentDataNavigationsItem {
+interface HomePageDocumentData {
   /**
-   * Link field in *settings → Navigations*
+   * Slice Zone field in *Home Page*
    *
-   * - **Field Type**: Link
+   * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.navigations[].link
-   * - **Documentation**: https://prismic.io/docs/fields/link
+   * - **API ID Path**: home_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
    */
-  link: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  slices: prismic.SliceZone<HomePageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Home Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: home_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Home Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: home_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Home Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Home Page document from Prismic
+ *
+ * - **API ID**: `home_page`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type HomePageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<HomePageDocumentData>,
+    "home_page",
+    Lang
   >;
+
+/**
+ * Item in *settings → Sociteys*
+ */
+export interface SettingsDocumentDataSociteysItem {
+  /**
+   * Link Text field in *settings → Sociteys*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.sociteys[].link_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  link_text: prismic.KeyTextField;
+
+  /**
+   * href field in *settings → Sociteys*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.sociteys[].href
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  href: prismic.KeyTextField;
+
+  /**
+   * logo field in *settings → Sociteys*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.sociteys[].logo
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  logo: prismic.KeyTextField;
 }
 
 /**
@@ -124,17 +207,15 @@ interface SettingsDocumentData {
   og_image: prismic.ImageField<never>;
 
   /**
-   * Navigations field in *settings*
+   * Sociteys field in *settings*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.navigations[]
+   * - **API ID Path**: settings.sociteys[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  navigations: prismic.GroupField<
-    Simplify<SettingsDocumentDataNavigationsItem>
-  >;
+  sociteys: prismic.GroupField<Simplify<SettingsDocumentDataSociteysItem>>;
 
   /**
    * Logo field in *settings*
@@ -146,6 +227,28 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   logo: prismic.ImageField<never>;
+
+  /**
+   * icon field in *settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.icon
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Execom Year field in *settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.execom_year
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  execom_year: prismic.KeyTextField;
 }
 
 /**
@@ -164,7 +267,94 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = SettingsDocument;
+export type AllDocumentTypes = HomePageDocument | SettingsDocument;
+
+/**
+ * Item in *Hero → Default → Primary → Carousel*
+ */
+export interface HeroSliceDefaultPrimaryCarouselItem {
+  /**
+   * Carousel_images field in *Hero → Default → Primary → Carousel*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.carousel[].carousel_images
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  carousel_images: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Hero → Default → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Title field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Button field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.button
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  button: prismic.KeyTextField;
+
+  /**
+   * Carousel field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.carousel[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  carousel: prismic.GroupField<Simplify<HeroSliceDefaultPrimaryCarouselItem>>;
+}
+
+/**
+ * Default variation for Hero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Hero*
+ */
+type HeroSliceVariation = HeroSliceDefault;
+
+/**
+ * Hero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -187,10 +377,18 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      HomePageDocument,
+      HomePageDocumentData,
+      HomePageDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
-      SettingsDocumentDataNavigationsItem,
+      SettingsDocumentDataSociteysItem,
       AllDocumentTypes,
+      HeroSlice,
+      HeroSliceDefaultPrimaryCarouselItem,
+      HeroSliceDefaultPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
     };
   }
 }

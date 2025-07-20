@@ -1,5 +1,9 @@
 {
   "id": "settings",
+  "label": "settings",
+  "repeatable": false,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "site_title": {
@@ -24,21 +28,31 @@
           "thumbnails": []
         }
       },
-      "navigations": {
+      "sociteys": {
         "type": "Group",
         "config": {
-          "label": "Navigations",
+          "label": "Sociteys",
           "repeat": true,
           "fields": {
-            "link": {
-              "type": "Link",
+            "link_text": {
+              "type": "Text",
               "config": {
-                "label": "Link",
-                "placeholder": "",
-                "select": null,
-                "allowTargetBlank": true,
-                "allowText": true,
-                "repeat": true
+                "label": "Link Text",
+                "placeholder": ""
+              }
+            },
+            "href": {
+              "type": "Text",
+              "config": {
+                "label": "href",
+                "placeholder": ""
+              }
+            },
+            "logo": {
+              "type": "Text",
+              "config": {
+                "label": "logo",
+                "placeholder": ""
               }
             }
           }
@@ -51,11 +65,22 @@
           "constraint": {},
           "thumbnails": []
         }
+      },
+      "icon": {
+        "type": "Image",
+        "config": {
+          "label": "icon",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "execom_year": {
+        "type": "Text",
+        "config": {
+          "label": "Execom Year",
+          "placeholder": ""
+        }
       }
     }
-  },
-  "label": "settings",
-  "repeatable": false,
-  "status": true,
-  "format": "custom"
+  }
 }
