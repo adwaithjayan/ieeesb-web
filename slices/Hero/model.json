@@ -26,13 +26,6 @@
             "placeholder": ""
           }
         },
-        "button": {
-          "type": "Text",
-          "config": {
-            "label": "Button",
-            "placeholder": ""
-          }
-        },
         "carousel": {
           "type": "Group",
           "config": {
@@ -48,6 +41,44 @@
                 }
               }
             }
+          }
+        },
+        "tag": {
+          "type": "Text",
+          "config": {
+            "label": "Tag",
+            "placeholder": ""
+          }
+        },
+        "socitys": {
+          "type": "Group",
+          "config": {
+            "label": "Socitys",
+            "repeat": true,
+            "fields": {
+              "socity": {
+                "type": "Image",
+                "config": {
+                  "label": "Socity",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        },
+        "events": {
+          "type": "Number",
+          "config": {
+            "label": "Events",
+            "placeholder": ""
+          }
+        },
+        "members": {
+          "type": "Number",
+          "config": {
+            "label": "Members",
+            "placeholder": ""
           }
         }
       },

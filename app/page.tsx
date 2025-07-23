@@ -1,4 +1,4 @@
-import { HeroSection } from "@/components/Test";
+import ScrollSections from "@/components/SectionWrapper";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { SliceZone } from "@prismicio/react";
@@ -8,8 +8,10 @@ export default async function Home() {
   const page = await client.getSingle("home_page");
   return (
     <section>
-      <SliceZone slices={page.data.slices} components={components} />
-      <HeroSection />
+      <ScrollSections>
+        <SliceZone slices={page.data.slices} components={components} />
+        <SliceZone slices={page.data.slices} components={components} />
+      </ScrollSections>
     </section>
   );
 }

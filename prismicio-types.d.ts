@@ -270,6 +270,58 @@ export type SettingsDocument<Lang extends string = string> =
 export type AllDocumentTypes = HomePageDocument | SettingsDocument;
 
 /**
+ * Primary content in *About → Default → Primary*
+ */
+export interface AboutSliceDefaultPrimary {
+  /**
+   * Title field in *About → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *About → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for About Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AboutSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AboutSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *About*
+ */
+type AboutSliceVariation = AboutSliceDefault;
+
+/**
+ * About Shared Slice
+ *
+ * - **API ID**: `about`
+ * - **Description**: About
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AboutSlice = prismic.SharedSlice<"about", AboutSliceVariation>;
+
+/**
  * Item in *Hero → Default → Primary → Carousel*
  */
 export interface HeroSliceDefaultPrimaryCarouselItem {
@@ -282,6 +334,21 @@ export interface HeroSliceDefaultPrimaryCarouselItem {
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
   carousel_images: prismic.ImageField<never>;
+}
+
+/**
+ * Item in *Hero → Default → Primary → Socitys*
+ */
+export interface HeroSliceDefaultPrimarySocitysItem {
+  /**
+   * Socity field in *Hero → Default → Primary → Socitys*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.socitys[].socity
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  socity: prismic.ImageField<never>;
 }
 
 /**
@@ -309,16 +376,6 @@ export interface HeroSliceDefaultPrimary {
   description: prismic.KeyTextField;
 
   /**
-   * Button field in *Hero → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: hero.default.primary.button
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  button: prismic.KeyTextField;
-
-  /**
    * Carousel field in *Hero → Default → Primary*
    *
    * - **Field Type**: Group
@@ -327,6 +384,46 @@ export interface HeroSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   carousel: prismic.GroupField<Simplify<HeroSliceDefaultPrimaryCarouselItem>>;
+
+  /**
+   * Tag field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.tag
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tag: prismic.KeyTextField;
+
+  /**
+   * Socitys field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.socitys[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  socitys: prismic.GroupField<Simplify<HeroSliceDefaultPrimarySocitysItem>>;
+
+  /**
+   * Events field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.events
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  events: prismic.NumberField;
+
+  /**
+   * Members field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.members
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  members: prismic.NumberField;
 }
 
 /**
@@ -384,8 +481,13 @@ declare module "@prismicio/client" {
       SettingsDocumentData,
       SettingsDocumentDataSociteysItem,
       AllDocumentTypes,
+      AboutSlice,
+      AboutSliceDefaultPrimary,
+      AboutSliceVariation,
+      AboutSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimaryCarouselItem,
+      HeroSliceDefaultPrimarySocitysItem,
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
